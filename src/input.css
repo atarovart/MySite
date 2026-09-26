@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0b0f19;
+  color: #f3f4f6;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.glass-card {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.15);
+}
+
+.glow-effect {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.glow-effect::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 8%;
+  width: 84%;
+  height: 82%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.26) 0%, rgba(59, 130, 246, 0.12) 25%, rgba(15, 118, 110, 0.06) 42%, rgba(0, 0, 0, 0) 72%);
+  filter: blur(22px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.custom-checkbox:checked + label .checkbox-box {
+  background-color: #06b6d4;
+  border-color: #06b6d4;
+}
+
+.custom-checkbox:checked + label .checkbox-box i {
+  opacity: 1;
+}
+
+.modal-header {
+  padding-right: 2.75rem;
+}
+
+.price-pill,
+.calc-price-pill {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.price-row,
+.calc-row {
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.price-row > :first-child,
+.calc-row > :first-child {
+  min-width: 0;
+}
+
+.profile-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+.profile-row .profile-text {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.profile-row .profile-value {
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.faq-answer {
+  padding-top: 0.75rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.summary-row > span:first-child {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.summary-row > span:last-child,
+.summary-total-value {
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+@media (max-width: 640px) {
+  .faq-answer {
+    padding-top: 0.6rem;
+  }
+
+  .modal-header {
+    padding-right: 2.5rem;
+  }
+
+  .service-price-pill,
+  .calc-price-pill,
+  .price-pill {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .price-row,
+  .calc-row {
+    align-items: center;
+  }
+
+  .profile-row {
+    column-gap: 0.5rem;
+  }
+
+  .profile-row .profile-value {
+    font-size: 0.75rem;
+  }
+}
