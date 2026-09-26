@@ -7,29 +7,8 @@
     <meta name="description" content="Частный ИТ-специалист Артур Атаров. Настройка 1С, ЭЦП, КриптоПро и серверов удаленно по всей России для компаний. Ремонт ПК и ноутбуков с выездом в Абакане.">
     <meta name="theme-color" content="#0b0f19">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0b0f19',
-                            card: '#111827',
-                            border: '#1f2937',
-                            cyan: '#06b6d4',
-                            emerald: '#10b981',
-                            blue: '#3b82f6'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css">
     
     <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -863,7 +842,7 @@
                         </div>
 
                         <h3 class="text-2xl font-bold text-white mb-2" data-i18n="remote.cardTitle">Экономия денег и времени</h3>
-                        <p class="text-slate-300 text-sm mb-6" data-i18n="remote.cardText">
+                        <p class="text-slate-300 text-sm mb-6" data-i18n-html="remote.cardText">
                             Простая удаленная консультация или устранение неполадок — всего 700 руб./час вместо полноценного выезда.
                         </p>
 
@@ -1278,7 +1257,7 @@
                 'hero.title': '1C setup, IT outsourcing and',
                 'hero.titleAccent': 'remote support',
                 'hero.titleTail': 'across Russia',
-                'hero.desc': 'Organizing remote work for companies, configuring 1C, digital signatures and servers across Russia with a 30% discount, as well as full-service website development for business. Fast PC repairs, builds and equipment servicing with on-site visits in Abakan.',
+                'hero.desc': 'We organize remote work for companies, configure 1C, digital signatures and servers across Russia with a 30% discount, and build turnkey websites of any complexity. Fast PC repair, assembly and equipment servicing with on-site visits in Abakan.',
                 'hero.feature1': 'Free diagnosis',
                 'hero.feature2': '30% discount on AnyDesk',
                 'hero.feature3': '14-day warranty',
@@ -1296,7 +1275,7 @@
                 'profile.quickText': 'I can connect remotely via AnyDesk right now with a 30% discount',
                 'services.badge': 'Transparent prices with no hidden fees',
                 'services.title': 'List of services',
-                'services.subtitle': 'You get a finished result with a guarantee. If the work is done remotely (AnyDesk/RDP) — a 30% discount applies!',
+                'services.subtitle': 'You receive a finished result with a guarantee. If the work is completed remotely (AnyDesk/RDP), a 30% discount applies!',
                 'calculator.badge': 'Service calculator',
                 'calculator.title': 'Estimate the cost in 10 seconds',
                 'calculator.subtitle': 'Choose the required services and execution format',
@@ -1314,7 +1293,7 @@
                 'calculator.submitButton': 'Submit request with discount',
                 'remote.badge': 'Savings and speed',
                 'remote.title': 'Remote computer support via AnyDesk',
-                'remote.text': 'Why wait for a technician for hours when the issue can be solved right now? 90% of software issues, viruses and settings are fixed remotely in 20–40 minutes.',
+                'remote.text': 'Why wait for a technician for hours if the issue can be solved right now? 90% of software problems, viruses and configuration issues are resolved remotely in 20–40 minutes.',
                 'remote.step1Title': 'Download free AnyDesk',
                 'remote.step1Text': 'The program is only 5 MB and does not require complex installation.',
                 'remote.step2Title': 'Share the connection number by phone',
@@ -1340,7 +1319,7 @@
                 'coverage.zone3Text': 'Visit to nearby villages and cottages by arrangement.',
                 'faq.badge': 'Questions and guarantees',
                 'faq.title': 'Frequently asked questions',
-                'faq.subtitle': 'Honest 14-day warranty on all work completed',
+                'faq.subtitle': 'Straightforward 14-day warranty on all completed work',
                 'faq.q1': 'What warranty do you provide for the work?',
                 'faq.a1': 'All services are covered by a 14-day warranty. If the same issue appears again within that period, I will fix it completely free of charge.',
                 'faq.q2': 'Will my photos and files be preserved during reinstallation?',
@@ -1414,7 +1393,7 @@
                 'hero.title': 'Podešavanje 1C, IT outsourcing i',
                 'hero.titleAccent': 'udaljena podrška',
                 'hero.titleTail': 'po celoj Rusiji',
-                'hero.desc': 'Organizacija rada na daljinu za kompanije, podešavanje 1C, ECPP i servera po celoj Rusiji sa popustom od 30%, kao i izrada web sajtova pod ključ za poslovanje. Brza popravka računara, montaža i servis opreme sa dolaskom u Abakanu.',
+                'hero.desc': 'Organizujemo rad na daljinu za kompanije, podešavamo 1C, elektronski potpis i servere po celoj Rusiji sa popustom od 30%, kao i izradu web sajtova pod ključ bilo koje složenosti. Brza popravka računara, montaža i servis opreme sa dolaskom u Abakanu.',
                 'hero.feature1': 'Besplatna dijagnoza',
                 'hero.feature2': 'Popust 30% na AnyDesk',
                 'hero.feature3': 'Garancija 14 dana',
@@ -1432,7 +1411,7 @@
                 'profile.quickText': 'Spojio bih se odmah udaljeno preko AnyDesk-a sa popustom od 30%',
                 'services.badge': 'Transparentne cene bez skrivenih troškova',
                 'services.title': 'Lista usluga',
-                'services.subtitle': 'Dobijate gotov rezultat sa garancijom. Ako je rad obavljen udaljeno (AnyDesk/RDP) — važi popust od 30%!',
+                'services.subtitle': 'Dobijate gotov rezultat sa garancijom. Ako je rad obavljen udaljeno (AnyDesk/RDP), važi popust od 30%!',
                 'calculator.badge': 'Kalkulator usluga',
                 'calculator.title': 'Izračunajte približnu cenu za 10 sekundi',
                 'calculator.subtitle': 'Izaberite potrebne usluge i format rada',
@@ -1461,7 +1440,7 @@
                 'remote.cardTitle': 'Ušteda novca i vremena',
                 'remote.cardText': 'Jednostavna udaljena konsultacija ili uklanjanje problema — svega <strong class="text-emerald-400">700 rub./sat</strong> umesto punog dolaska.',
                 'remote.cardSafe': 'Sigurno: veza se prekida kada se program zatvori.',
-                'remote.cardPrivate': 'Povratno: pristup je moguć samo uz vaše odobrenje.',
+                'remote.cardPrivate': 'Poverljivo: pristup je moguć samo uz vaše odobrenje.',
                 'coverage.badge': 'Geografija fizičkih usluga',
                 'coverage.title': 'Fizička popravka (Abakan i okolina)',
                 'coverage.subtitle': 'Dolazak majstora za montažu i hardversku popravku (udaljeno podešavanje — po celoj Rusiji)',
@@ -1487,7 +1466,7 @@
                 'faq.a4': 'Apsolutno. U realnom vremenu vidite sve radnje na ekranu. Bez vašeg odobrenja nije moguće povezivanje, a po zatvaranju programa pristup se odmah poništava.',
                 'contact.badge': 'Kontaktirajte me',
                 'contact.title': 'Treba vam pomoć odmah?',
-                'contact.subtitle': 'Pozovite za besplatnu konsultaciju i tačnu dijagnozu telefonom!',
+                'contact.subtitle': 'Pozovite za besplatnu konsultaciju i preciznu dijagnozu telefonom!',
                 'contact.phoneLabel': 'Telefon za kontakt',
                 'contact.emailLabel': 'E-mail',
                 'contact.regionLabel': 'Regija rada',
@@ -1585,12 +1564,12 @@
             },
             en: {
                 'service1.title': '1. Turnkey website creation for business',
-                'service1.item1': 'Landing page under development for sales and leads',
+                'service1.item1': 'Landing page for sales and leads',
                 'service1.item2': 'Online store and product catalog',
                 'service1.item3': 'Corporate website / company site',
                 'service1.item4': 'Enhancements, support and SEO structure',
-                'service1.result': 'Result: A ready-made website that helps sell and attract clients.',
-                'service2.title': '2. Setting up 1C, UTM, e-signatures, Rutoken and CryptoPro',
+                'service1.result': 'Result: a ready-made website that helps sell and attract clients.',
+                'service2.title': '2. Setting up 1C, UTM, electronic signatures, Rutoken and CryptoPro',
                 'service2.item1': 'Setup and connection of 1C, cash registers, servers and work services',
                 'service2.item2': 'Connection and setup of UTM, work environments and resource access',
                 'service2.item3': 'Installation and setup of digital signatures, Rutoken, CryptoPro',
@@ -1608,11 +1587,11 @@
                 'service3.item3': 'Browser, archive, office setup',
                 'service3.item4': 'Help with software licensing',
                 'service3.result': 'Result: The system works like new.',
-                'service4.title': '5. PC assembly turnkey in 1 day',
+                'service4.title': '5. Turnkey PC assembly in 1 day',
                 'service4.item1': 'Selecting the best components for your budget',
                 'service4.item2': 'Quality assembly and cable management',
                 'service4.item3': 'Full-cycle option (procurement + assembly) for 6,000 ₽',
-                'service4.result': 'Result: A powerful PC with room for the future.',
+                'service4.result': 'Result: a powerful PC with room for the future.',
                 'service5.title': '6. SSD and RAM installation',
                 'service5.item1': 'Consultation and precise component selection',
                 'service5.item2': 'Physical installation of SSD and fast memory',
@@ -1732,6 +1711,13 @@
             if (descriptionMeta) {
                 descriptionMeta.setAttribute('content', dict.metaDescription);
             }
+
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.dataset.i18nHtml;
+                if (dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.dataset.i18n;
