@@ -90,6 +90,103 @@
             opacity: 1;
         }
 
+        .modal-header {
+            padding-right: 2.75rem;
+        }
+
+        .price-pill,
+        .calc-price-pill {
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .price-row,
+        .calc-row {
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .price-row > :first-child,
+        .calc-row > :first-child {
+            min-width: 0;
+        }
+
+        .profile-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            column-gap: 0.75rem;
+        }
+
+        .profile-row .profile-text {
+            min-width: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .profile-row .profile-value {
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .faq-answer {
+            padding-top: 0.75rem;
+        }
+
+        @media (max-width: 640px) {
+            .faq-answer {
+                padding-top: 0.6rem;
+            }
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .summary-row > span:first-child {
+            min-width: 0;
+            white-space: nowrap;
+        }
+
+        .summary-row > span:last-child,
+        .summary-total-value {
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        @media (max-width: 640px) {
+            .modal-header {
+                padding-right: 2.5rem;
+            }
+
+            .service-price-pill,
+            .calc-price-pill,
+            .price-pill {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .price-row,
+            .calc-row {
+                align-items: center;
+            }
+
+            .profile-row {
+                column-gap: 0.5rem;
+            }
+
+            .profile-row .profile-value {
+                font-size: 0.75rem;
+            }
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -311,21 +408,21 @@
                         </div>
 
                         <div class="space-y-3 pt-4 border-t border-slate-800 text-sm">
-                            <div class="flex justify-between items-center text-slate-300">
-                                <span><i class="fa-solid fa-check text-cyan-400 mr-2"></i><span data-i18n="profile.b2b">B2B сопровождение, 1С и сайты под ключ:</span></span>
-                                <span class="font-bold text-emerald-400">от 10 000 ₽</span>
+                            <div class="profile-row text-slate-300">
+                                <span class="profile-text"><i class="fa-solid fa-check text-cyan-400 shrink-0 mt-0.5"></i><span data-i18n="profile.b2b">B2B сопровождение, 1С и сайты под ключ:</span></span>
+                                <span class="profile-value font-bold text-emerald-400">от 10 000 ₽</span>
                             </div>
-                            <div class="flex justify-between items-center text-slate-300">
-                                <span><i class="fa-solid fa-check text-cyan-400 mr-2"></i><span data-i18n="profile.remote">Удаленная помощь по РФ:</span></span>
-                                <span class="font-bold text-cyan-400" data-i18n="profile.remoteDiscount">Скидка -30%</span>
+                            <div class="profile-row text-slate-300">
+                                <span class="profile-text"><i class="fa-solid fa-check text-cyan-400 shrink-0 mt-0.5"></i><span data-i18n="profile.remote">Удаленная помощь по РФ:</span></span>
+                                <span class="profile-value font-bold text-cyan-400" data-i18n="profile.remoteDiscount">Скидка -30%</span>
                             </div>
-                            <div class="flex justify-between items-center text-slate-300">
-                                <span><i class="fa-solid fa-check text-cyan-400 mr-2"></i><span data-i18n="profile.outcall">Выезд (Абакан и пригород):</span></span>
-                                <span class="font-bold text-slate-200">от 0 ₽</span>
+                            <div class="profile-row text-slate-300">
+                                <span class="profile-text"><i class="fa-solid fa-check text-cyan-400 shrink-0 mt-0.5"></i><span data-i18n="profile.outcall">Выезд (Абакан и пригород):</span></span>
+                                <span class="profile-value font-bold text-slate-200">от 0 ₽</span>
                             </div>
-                            <div class="flex justify-between items-center text-slate-300">
-                                <span><i class="fa-solid fa-check text-cyan-400 mr-2"></i><span data-i18n="profile.diagnostics">Диагностика проблемы:</span></span>
-                                <span class="font-bold text-emerald-400">0 ₽</span>
+                            <div class="profile-row text-slate-300">
+                                <span class="profile-text"><i class="fa-solid fa-check text-cyan-400 shrink-0 mt-0.5"></i><span data-i18n="profile.diagnostics">Диагностика проблемы:</span></span>
+                                <span class="profile-value font-bold text-emerald-400">0 ₽</span>
                             </div>
                         </div>
 
@@ -357,11 +454,11 @@
                 <!-- Service 1 (Websites & B2B) -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between border-cyan-500/30">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl font-bold shrink-0">
                                 <i class="fa-solid fa-globe"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-bold text-sm border border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-bold text-sm border border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
                                 от 10 000 ₽
                             </span>
                         </div>
@@ -381,11 +478,11 @@
                 <!-- Service 2 (1C & B2B) -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl font-bold shrink-0">
                                 <i class="fa-solid fa-server"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-bold text-sm border border-cyan-500/30">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-bold text-sm border border-cyan-500/30">
                                 от 2 500 ₽
                             </span>
                         </div>
@@ -405,11 +502,11 @@
                 <!-- Service 3 -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl font-bold shrink-0">
                                 <i class="fa-solid fa-fan"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-bold text-sm border border-cyan-500/30">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-bold text-sm border border-cyan-500/30">
                                 от 1 500 ₽
                             </span>
                         </div>
@@ -429,11 +526,11 @@
                 <!-- Service 3 -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl font-bold shrink-0">
                                 <i class="fa-brands fa-windows"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 font-bold text-sm border border-blue-500/30">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 font-bold text-sm border border-blue-500/30">
                                 от 2 000 ₽
                             </span>
                         </div>
@@ -453,11 +550,11 @@
                 <!-- Service 4 -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold shrink-0">
                                 <i class="fa-solid fa-desktop"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-sm border border-emerald-500/30">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-sm border border-emerald-500/30">
                                 2 000 - 6 000 ₽
                             </span>
                         </div>
@@ -476,11 +573,11 @@
                 <!-- Service 5 -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl font-bold shrink-0">
                                 <i class="fa-solid fa-microchip"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold text-sm border border-amber-500/30">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold text-sm border border-amber-500/30">
                                 от 1 500 ₽
                             </span>
                         </div>
@@ -499,11 +596,11 @@
                 <!-- Service 6 -->
                 <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl font-bold">
+                        <div class="flex justify-between items-start gap-3 mb-4 price-row">
+                            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl font-bold shrink-0">
                                 <i class="fa-solid fa-database"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-bold text-sm border border-rose-500/30">
+                            <span class="service-price-pill price-pill px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-bold text-sm border border-rose-500/30">
                                 от 1 500 ₽ / 700 ₽ ч
                             </span>
                         </div>
@@ -545,98 +642,98 @@
                         <!-- Item 1 (Website creation first) -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-1" class="hidden custom-checkbox calc-item" data-price="10000" data-key="calc.item1">
-                            <label for="calc-srv-1" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-1" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item1">Создание сайта под ключ: лендинг, интернет-магазин, корпоративный сайт</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">от 10 000 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">от 10 000 ₽</span>
                             </label>
                         </div>
 
                         <!-- Item 2 -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-2" class="hidden custom-checkbox calc-item" data-price="2500" data-key="calc.item2">
-                            <label for="calc-srv-2" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-2" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item2">Настройка 1С, ЭЦП, кассы, серверов (B2B)</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">2 500 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">2 500 ₽</span>
                             </label>
                         </div>
 
                         <!-- Item 3 -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-3" class="hidden custom-checkbox calc-item" data-price="1500" data-key="calc.item3">
-                            <label for="calc-srv-3" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-3" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item3">Диагностика и чистка от пыли/вирусов</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">1 500 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">1 500 ₽</span>
                             </label>
                         </div>
 
                         <!-- Item 4 -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-4" class="hidden custom-checkbox calc-item" data-price="2000" data-key="calc.item4">
-                            <label for="calc-srv-4" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-4" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item4">Переустановка Windows + Драйверы + Офис</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">2 000 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">2 000 ₽</span>
                             </label>
                         </div>
 
                         <!-- Item 5 -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-5" class="hidden custom-checkbox calc-item" data-price="1500" data-key="calc.item5">
-                            <label for="calc-srv-5" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-5" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item5">Установка нового SSD диска или ОЗУ</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">1 500 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">1 500 ₽</span>
                             </label>
                         </div>
 
                         <!-- Item 6 -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-6" class="hidden custom-checkbox calc-item" data-price="2000" data-key="calc.item6">
-                            <label for="calc-srv-6" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-6" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item6">Сборка ПК за 1 день (работа)</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">2 000 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">2 000 ₽</span>
                             </label>
                         </div>
 
                         <!-- Item 7 -->
                         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition-colors">
                             <input type="checkbox" id="calc-srv-7" class="hidden custom-checkbox calc-item" data-price="1500" data-key="calc.item7">
-                            <label for="calc-srv-7" class="flex items-center justify-between cursor-pointer select-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all">
+                            <label for="calc-srv-7" class="calc-row flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-5 h-5 rounded border border-slate-600 bg-slate-800 checkbox-box flex items-center justify-center transition-all shrink-0">
                                         <i class="fa-solid fa-check text-xs text-white opacity-0 transition-opacity"></i>
                                     </div>
                                     <span class="text-sm font-medium text-slate-200" data-static-key="calc.item7">Восстановление удаленных файлов</span>
                                 </div>
-                                <span class="text-sm font-bold text-cyan-400">1 500 ₽</span>
+                                <span class="calc-price-pill text-sm font-bold text-cyan-400 whitespace-nowrap">1 500 ₽</span>
                             </label>
                         </div>
 
@@ -675,23 +772,23 @@
                         <!-- Price Summary Card -->
                         <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800">
                             <div class="space-y-2 text-sm border-b border-slate-800 pb-3">
-                                <div class="flex justify-between text-slate-400">
+                                <div class="summary-row text-slate-400">
                                     <span data-i18n="calculator.servicesTotal">Услуги:</span>
                                     <span id="calc-subtotal-text" class="text-white font-medium">0 ₽</span>
                                 </div>
-                                <div class="flex justify-between text-emerald-400 font-medium hidden" id="calc-discount-row">
+                                <div class="summary-row text-emerald-400 font-medium hidden" id="calc-discount-row">
                                     <span data-i18n="calculator.discountLabel">Скидка AnyDesk (-30%):</span>
                                     <span id="calc-discount-text">-0 ₽</span>
                                 </div>
-                                <div class="flex justify-between text-slate-400" id="calc-outcall-row">
+                                <div class="summary-row text-slate-400" id="calc-outcall-row">
                                     <span data-i18n="calculator.outcallLabel">Выезд:</span>
                                     <span id="calc-outcall-text" class="text-white font-medium">0 ₽</span>
                                 </div>
                             </div>
 
-                            <div class="pt-4 flex items-baseline justify-between mb-6">
-                                <span class="text-base font-bold text-white" data-i18n="calculator.totalLabel">Итого к оплате:</span>
-                                <span id="calc-final-total" class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">0 ₽</span>
+                            <div class="pt-4 flex items-end justify-between gap-3 mb-6">
+                                <span class="text-base font-bold text-white leading-tight" data-i18n="calculator.totalLabel">Итого к оплате:</span>
+                                <span id="calc-final-total" class="summary-total-value text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 leading-none">0 ₽</span>
                             </div>
 
                             <button onclick="submitCalculator()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] transition-all" data-i18n="calculator.submitButton">
@@ -851,7 +948,7 @@
                         <span><i class="fa-solid fa-shield-halved text-cyan-400 mr-3"></i> <span data-i18n="faq.q1">Какая гарантия на выполненные работы?</span></span>
                         <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
                     </button>
-                    <div class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a1">
+                    <div class="faq-answer hidden p-5 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a1">
                         На все услуги действует гарантия 14 дней. Если в течение этого периода проблема возникнет снова по той же причине, я устраню её абсолютно бесплатно.
                     </div>
                 </div>
@@ -862,7 +959,7 @@
                         <span><i class="fa-solid fa-folder-closed text-cyan-400 mr-3"></i> <span data-i18n="faq.q2">Сохранятся ли мои фотографии и файлы при переустановке?</span></span>
                         <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
                     </button>
-                    <div class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a2">
+                    <div class="faq-answer hidden p-5 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a2">
                         Да! Перед переустановкой Windows я обязательно копирую все важные документы, фотографии и семейные архивы на резервный носитель. Ваши файлы останутся в полной сохранности.
                     </div>
                 </div>
@@ -873,7 +970,7 @@
                         <span><i class="fa-solid fa-cart-shopping text-cyan-400 mr-3"></i> <span data-i18n="faq.q3">Кто покупает комплектующие при сборке или апгрейде?</span></span>
                         <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
                     </button>
-                    <div class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a3">
+                    <div class="faq-answer hidden p-5 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a3">
                         Комплектующие приобретаются за ваш счет. Я подскажу, где самые выгодные цены и качественные детали в Абакане. Также вы можете заказать услугу «Сборка ПК под ключ» (6 000 руб.), и я полностью возьму закупку, сборку и доставку на себя.
                     </div>
                 </div>
@@ -884,7 +981,7 @@
                         <span><i class="fa-solid fa-desktop text-cyan-400 mr-3"></i> <span data-i18n="faq.q4">Безопасно ли пускать мастера через AnyDesk?</span></span>
                         <i class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
                     </button>
-                    <div class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a4">
+                    <div class="faq-answer hidden p-5 text-slate-300 text-sm border-t border-slate-800/60 bg-slate-950/40 leading-relaxed" data-i18n="faq.a4">
                         Абсолютно. Вы видите все действия на мониторе в реальном времени. Без вашего подтверждения подключиться невозможно, а после закрытия программы доступ сразу аннулируется.
                     </div>
                 </div>
@@ -987,12 +1084,14 @@
     <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="glass-card max-w-md w-full p-6 sm:p-8 rounded-3xl border border-slate-700 bg-slate-900 shadow-2xl relative transform scale-95 transition-transform duration-300" id="modal-content">
             
-            <button onclick="closeModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+            <button onclick="closeModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center shrink-0 z-10">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <h3 class="text-2xl font-bold text-white mb-1" id="modal-title" data-i18n="modal.title">Оставить заявку</h3>
-            <p class="text-xs text-cyan-400 font-medium mb-6" id="modal-subtitle" data-i18n="modal.subtitle">Бесплатная консультация мастера</p>
+            <div class="modal-header min-w-0 pr-10">
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight break-words" id="modal-title" data-i18n="modal.title">Оставить заявку</h3>
+                <p class="text-xs text-cyan-400 font-medium mb-6 leading-snug break-words" id="modal-subtitle" data-i18n="modal.subtitle">Бесплатная консультация мастера</p>
+            </div>
 
             <form id="modal-contact-form" action="https://formsubmit.co/at.art7100@gmail.com" method="POST" onsubmit="handleModalSubmit(event)" class="space-y-4">
                 <!-- Скрытые настройки FormSubmit -->
@@ -1814,23 +1913,38 @@
             submitBtn.style.opacity = '0.7';
             submitBtn.disabled = true;
 
-            const formData = new FormData(form);
+            const payload = Object.fromEntries(new FormData(form).entries());
+            const ajaxEndpoint = form.action.includes('/ajax/')
+                ? form.action
+                : form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
 
-            fetch(form.action, {
+            fetch(ajaxEndpoint, {
                 method: 'POST',
-                body: formData,
                 headers: {
-                    'Accept': 'application/json'
-                }
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success || data.success === 'true') {
+            .then(async response => {
+                const text = await response.text();
+                let data = null;
+
+                if (text) {
+                    try {
+                        data = JSON.parse(text);
+                    } catch (e) {
+                        data = null;
+                    }
+                }
+
+                const isSuccess = response.ok && (!data || data.success !== false);
+                if (isSuccess) {
                     showToast(getText('toast.success'), 'success');
                     form.reset();
                     if (successCallback) successCallback();
                 } else {
-                    showToast(getText('toast.serverError'), 'error');
+                    throw new Error(data?.message || 'FormSubmit error');
                 }
             })
             .catch(() => {
