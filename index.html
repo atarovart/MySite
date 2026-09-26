@@ -1897,11 +1897,9 @@
             }, 4000);
         }
 
-        const TELEGRAM_BOT_USERNAME = 'artur_repair_bot';
-        const TELEGRAM_BOT_TOKEN = '8541221079:AAGdcemwx7957qtEuEEkpK7OgNkuh6LfRe4';
-        const TELEGRAM_CHAT_ID = '415199303';
+        const FORM_RECEIVER_EMAIL = 'at.art7100@gmail.com';
 
-        function buildTelegramMessage(payload) {
+        function buildEmailMessage(payload) {
             return [
                 'Новая заявка с сайта',
                 '',
@@ -1909,17 +1907,18 @@
             ].join('\n');
         }
 
-        function openTelegramBot(form, payload, successCallback) {
-            const messageText = buildTelegramMessage(payload);
-            const telegramUrl = `https://t.me/${TELEGRAM_BOT_USERNAME}?text=${encodeURIComponent(messageText)}`;
+        function sendFormByMail(form, payload, successCallback) {
+            const subject = encodeURIComponent('Новая заявка с сайта');
+            const body = encodeURIComponent(buildEmailMessage(payload));
+            const mailtoLink = `mailto:${FORM_RECEIVER_EMAIL}?subject=${subject}&body=${body}`;
 
             try {
-                window.open(telegramUrl, '_blank', 'noopener');
+                window.location.href = mailtoLink;
             } catch (error) {
-                window.location.href = telegramUrl;
+                window.open(mailtoLink, '_self');
             }
 
-            showToast('Заявка открыта в Telegram. Проверьте чат и отправьте сообщение боту.', 'success');
+            showToast('Открыта почта для отправки заявки. Отправьте письмо, чтобы заявка ушла.', 'success');
             form.reset();
             if (successCallback) successCallback();
         }
@@ -1932,71 +1931,12 @@
 
             const payload = Object.fromEntries(new FormData(form).entries());
 
-            if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes('YOUR_')) {
-                setTimeout(() => {
-                    openTelegramBot(form, payload, successCallback);
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.style.opacity = '1';
-                    submitBtn.disabled = false;
-                }, 300);
-                return;
-            }
-
-            if (!TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID.includes('YOUR_')) {
-                showToast('Укажите chat_id Telegram в коде сайта.', 'error');
+            setTimeout(() => {
+                sendFormByMail(form, payload, successCallback);
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.style.opacity = '1';
                 submitBtn.disabled = false;
-                return;
-            }
-
-            const messageText = [
-                '<b>Новая заявка с сайта</b>',
-                '',
-                ...Object.entries(payload).map(([key, value]) => `<b>${key}</b>: ${value || '—'}`)
-            ].join('\n');
-
-            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: messageText,
-                    parse_mode: 'HTML'
-                })
-            })
-            .then(async response => {
-                const text = await response.text();
-                let data = null;
-
-                if (text) {
-                    try {
-                        data = JSON.parse(text);
-                    } catch (e) {
-                        data = null;
-                    }
-                }
-
-                const isSuccess = response.ok && data?.ok === true;
-                if (isSuccess) {
-                    showToast(getText('toast.success'), 'success');
-                    form.reset();
-                    if (successCallback) successCallback();
-                } else {
-                    throw new Error(data?.description || 'Telegram error');
-                }
-            })
-            .catch(() => {
-                showToast(getText('toast.networkError'), 'error');
-            })
-            .finally(() => {
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.style.opacity = '1';
-                submitBtn.disabled = false;
-            });
+            }, 300);
         }
 
         function handleMainFormSubmit(e) {
