@@ -1897,30 +1897,37 @@
             }, 4000);
         }
 
-        const FORM_RECEIVER_EMAIL = 'at.art7100@gmail.com';
+        const FORMTOMAIL_API_URL = 'https://api.formtomail.ru/send';
+        const FORMTOMAIL_TOKEN = 'npMlhfGP0qKvFYt4';
 
-        function buildEmailMessage(payload) {
-            return [
-                'Новая заявка с сайта',
-                '',
-                ...Object.entries(payload).map(([key, value]) => `${key}: ${value || '—'}`)
-            ].join('\n');
-        }
+        function sendFormToMail(form, payload, successCallback) {
+            fetch(FORMTOMAIL_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${FORMTOMAIL_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: 'Новая заявка',
+                    body: payload,
+                    honeypot: form.querySelector('[name="company_website"]')?.value || ''
+                })
+            })
+            .then(async response => {
+                const data = await response.json();
 
-        function sendFormByMail(form, payload, successCallback) {
-            const subject = encodeURIComponent('Новая заявка с сайта');
-            const body = encodeURIComponent(buildEmailMessage(payload));
-            const mailtoLink = `mailto:${FORM_RECEIVER_EMAIL}?subject=${subject}&body=${body}`;
+                if (response.ok && data?.statusCode === 200) {
+                    showToast(getText('toast.success'), 'success');
+                    form.reset();
+                    if (successCallback) successCallback();
+                    return;
+                }
 
-            try {
-                window.location.href = mailtoLink;
-            } catch (error) {
-                window.open(mailtoLink, '_self');
-            }
-
-            showToast('Открыта почта для отправки заявки. Отправьте письмо, чтобы заявка ушла.', 'success');
-            form.reset();
-            if (successCallback) successCallback();
+                throw new Error(data?.message || 'FormToMail error');
+            })
+            .catch(() => {
+                showToast(getText('toast.networkError'), 'error');
+            });
         }
 
         function submitFormAjax(form, submitBtn, successCallback) {
@@ -1931,12 +1938,13 @@
 
             const payload = Object.fromEntries(new FormData(form).entries());
 
+            sendFormToMail(form, payload, successCallback);
+
             setTimeout(() => {
-                sendFormByMail(form, payload, successCallback);
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.style.opacity = '1';
                 submitBtn.disabled = false;
-            }, 300);
+            }, 700);
         }
 
         function handleMainFormSubmit(e) {
