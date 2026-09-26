@@ -1044,12 +1044,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2" data-i18n="contact.formTitle">Оставить заявку на ремонт</h3>
                         <p class="text-slate-400 text-sm mb-6" data-i18n="contact.formSubtitle">Заполните форму, и Артур перезвонит вам в течение 10 минут</p>
 
-                        <form id="main-contact-form" action="https://formsubmit.co/at.art7100@gmail.com" method="POST" onsubmit="handleMainFormSubmit(event)" class="space-y-4">
-                            <!-- Скрытые настройки FormSubmit -->
-                            <input type="hidden" name="_subject" value="Новая заявка на IT-услуги (Главная форма)!">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_template" value="table">
-
+                        <form id="main-contact-form" action="#" method="POST" onsubmit="handleMainFormSubmit(event)" class="space-y-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="contact.nameLabel">Ваше имя</label>
                                 <input type="text" name="Имя" required data-i18n-placeholder="contact.namePlaceholder" placeholder="Например: Александр" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all">
@@ -1093,12 +1088,7 @@
                 <p class="text-xs text-cyan-400 font-medium mb-6 leading-snug break-words" id="modal-subtitle" data-i18n="modal.subtitle">Бесплатная консультация мастера</p>
             </div>
 
-            <form id="modal-contact-form" action="https://formsubmit.co/at.art7100@gmail.com" method="POST" onsubmit="handleModalSubmit(event)" class="space-y-4">
-                <!-- Скрытые настройки FormSubmit -->
-                <input type="hidden" name="_subject" value="Новая заявка с сайта (Модальное окно)!">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                
+            <form id="modal-contact-form" action="#" method="POST" onsubmit="handleModalSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="modal.nameLabel">Имя</label>
                     <input type="text" name="Имя" required data-i18n-placeholder="modal.namePlaceholder" placeholder="Как к вам обращаться?" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:border-cyan-500 outline-none">
@@ -1907,6 +1897,39 @@
             }, 4000);
         }
 
+        const FORMTOMAIL_API_URL = 'https://api.formtomail.ru/send';
+        const FORMTOMAIL_TOKEN = 'npMlhfGP0qKvFYt4';
+
+        function sendFormToMail(form, payload, successCallback) {
+            fetch(FORMTOMAIL_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${FORMTOMAIL_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: 'Новая заявка',
+                    body: payload,
+                    honeypot: form.querySelector('[name="company_website"]')?.value || ''
+                })
+            })
+            .then(async response => {
+                const data = await response.json();
+
+                if (response.ok && data?.statusCode === 200) {
+                    showToast(getText('toast.success'), 'success');
+                    form.reset();
+                    if (successCallback) successCallback();
+                    return;
+                }
+
+                throw new Error(data?.message || 'FormToMail error');
+            })
+            .catch(() => {
+                showToast(getText('toast.networkError'), 'error');
+            });
+        }
+
         function submitFormAjax(form, submitBtn, successCallback) {
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> ${getText('toast.sending')}`;
@@ -1914,47 +1937,14 @@
             submitBtn.disabled = true;
 
             const payload = Object.fromEntries(new FormData(form).entries());
-            const ajaxEndpoint = form.action.includes('/ajax/')
-                ? form.action
-                : form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
 
-            fetch(ajaxEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(async response => {
-                const text = await response.text();
-                let data = null;
+            sendFormToMail(form, payload, successCallback);
 
-                if (text) {
-                    try {
-                        data = JSON.parse(text);
-                    } catch (e) {
-                        data = null;
-                    }
-                }
-
-                const isSuccess = response.ok && (!data || data.success !== false);
-                if (isSuccess) {
-                    showToast(getText('toast.success'), 'success');
-                    form.reset();
-                    if (successCallback) successCallback();
-                } else {
-                    throw new Error(data?.message || 'FormSubmit error');
-                }
-            })
-            .catch(() => {
-                showToast(getText('toast.networkError'), 'error');
-            })
-            .finally(() => {
+            setTimeout(() => {
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.style.opacity = '1';
                 submitBtn.disabled = false;
-            });
+            }, 700);
         }
 
         function handleMainFormSubmit(e) {
