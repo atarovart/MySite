@@ -2266,6 +2266,19 @@
         });
 
         document.addEventListener('click', event => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-btn');
+            const clickedInsideMobileMenu = mobileMenu.contains(event.target);
+            const clickedMobileMenuButton = mobileMenuButton.contains(event.target);
+
+            if (!clickedInsideMobileMenu && !clickedMobileMenuButton && mobileMenu.classList.contains('is-open')) {
+                mobileMenu.classList.remove('is-open');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                mobileMenuButton.setAttribute('aria-label', 'Открыть меню');
+                mobileMenuButton.querySelector('i').className = 'fa-solid fa-bars text-xl';
+            }
+
             if (!event.target.closest('.lang-menu-trigger') && !event.target.closest('.lang-menu')) {
                 document.querySelectorAll('.lang-menu').forEach(menu => {
                     menu.classList.remove('is-open');
