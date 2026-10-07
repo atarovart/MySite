@@ -23,6 +23,55 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 180ms ease;
+            will-change: transform;
+        }
+
+        .custom-cursor-dot {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22d3ee;
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.85);
+            transform: translate(-50%, -50%);
+            transition: width 180ms ease, height 180ms ease, background-color 180ms ease, opacity 180ms ease;
+        }
+
+        .custom-cursor-ring {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(34, 211, 238, 0.75);
+            border-radius: 999px;
+            transform: translate(-50%, -50%);
+            transition: width 220ms ease, height 220ms ease, border-color 220ms ease, opacity 180ms ease;
+            mix-blend-mode: screen;
+        }
+
+        .custom-cursor.is-active .custom-cursor-dot {
+            width: 11px;
+            height: 11px;
+            background: #67e8f9;
+        }
+
+        .custom-cursor.is-active .custom-cursor-ring {
+            width: 57px;
+            height: 57px;
+            border-color: rgba(103, 232, 249, 0.9);
+        }
+
+        .custom-cursor.is-hidden {
+            opacity: 0;
+        }
         
         .glass-card {
             background: rgba(17, 24, 39, 0.7);
@@ -112,6 +161,45 @@
 
         .faq-answer {
             padding-top: 0.75rem;
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-8px);
+            transition:
+                max-height 320ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 220ms ease,
+                transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.is-open {
+            max-height: 31rem;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-link {
+            transform: translateX(-8px);
+            opacity: 0;
+            transition: transform 220ms ease, color 180ms ease, opacity 220ms ease;
+        }
+
+        .mobile-menu.is-open .mobile-menu-link {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .mobile-menu.is-open .mobile-menu-link:nth-child(2) { transition-delay: 35ms; }
+        .mobile-menu.is-open .mobile-menu-link:nth-child(3) { transition-delay: 70ms; }
+        .mobile-menu.is-open .mobile-menu-link:nth-child(4) { transition-delay: 105ms; }
+        .mobile-menu.is-open .mobile-menu-link:nth-child(5) { transition-delay: 140ms; }
+
+        @media (min-width: 768px) {
+            html {
+                scroll-behavior: smooth;
+            }
         }
 
         @media (max-width: 640px) {
@@ -238,6 +326,12 @@
 </head>
 <body class="antialiased text-slate-200">
 
+    <!-- Custom Desktop Cursor -->
+    <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
+        <div class="custom-cursor-ring"></div>
+        <div class="custom-cursor-dot"></div>
+    </div>
+
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
@@ -324,12 +418,12 @@
         </div>
 
         <!-- Mobile Drawer Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3">
-            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.services">Услуги и цены</a>
-            <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.calculator">Калькулятор ремонта</a>
-            <a href="#remote" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.remote">Удаленная помощь (AnyDesk)</a>
-            <a href="#coverage" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.coverage">Зоны выезда</a>
-            <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.faq">Ответы на вопросы</a>
+        <div id="mobile-menu" class="mobile-menu md:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3" aria-hidden="true">
+            <a href="#services" onclick="toggleMobileMenu()" class="mobile-menu-link block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.services">Услуги и цены</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="mobile-menu-link block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.calculator">Калькулятор ремонта</a>
+            <a href="#remote" onclick="toggleMobileMenu()" class="mobile-menu-link block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.remote">Удаленная помощь (AnyDesk)</a>
+            <a href="#coverage" onclick="toggleMobileMenu()" class="mobile-menu-link block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.coverage">Зоны выезда</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="mobile-menu-link block py-2 text-slate-300 hover:text-cyan-400 font-medium" data-i18n="mobile.faq">Ответы на вопросы</a>
             <div class="pt-2 border-t border-slate-800/80 flex flex-col gap-3 md:hidden">
                 <div class="relative w-full">
                     <button type="button" class="lang-menu-trigger flex w-full items-center justify-between rounded-full border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-cyan-500/40 hover:text-white" aria-label="Language selector" aria-expanded="false">
@@ -1879,7 +1973,52 @@
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            const button = document.getElementById('mobile-menu-btn');
+            const isOpen = menu.classList.toggle('is-open');
+
+            menu.setAttribute('aria-hidden', String(!isOpen));
+            button.setAttribute('aria-expanded', String(isOpen));
+            button.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+            button.querySelector('i').className = isOpen ? 'fa-solid fa-xmark text-xl' : 'fa-solid fa-bars text-xl';
+        }
+
+        function initializeCustomCursor() {
+            const cursor = document.getElementById('custom-cursor');
+            const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+            if (!isFinePointer || window.matchMedia('(max-width: 767px)').matches) {
+                cursor.remove();
+                return;
+            }
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            const updateCursor = () => {
+                ringX += (mouseX - ringX) * 0.16;
+                ringY += (mouseY - ringY) * 0.16;
+                cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+                cursor.querySelector('.custom-cursor-ring').style.transform = `translate3d(${ringX - mouseX}px, ${ringY - mouseY}px, 0) translate(-50%, -50%)`;
+                requestAnimationFrame(updateCursor);
+            };
+
+            window.addEventListener('mousemove', event => {
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+                cursor.classList.remove('is-hidden');
+            });
+
+            window.addEventListener('mouseleave', () => cursor.classList.add('is-hidden'));
+            window.addEventListener('mouseenter', () => cursor.classList.remove('is-hidden'));
+
+            document.querySelectorAll('a, button, input, select, textarea, label, [data-cursor]').forEach(element => {
+                element.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
+                element.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
+            });
+
+            requestAnimationFrame(updateCursor);
         }
 
         function openModal(title = getText('modal.defaultTitle'), note = getText('modal.defaultNote')) {
@@ -2038,6 +2177,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             applyLanguage('ru');
             calculateTotal();
+            initializeCustomCursor();
         });
     </script>
 </body>
