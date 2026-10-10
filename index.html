@@ -5,7 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ИТ-поддержка по всему миру: сайты и 1С — Артур Атаров</title>
     <meta name="description" content="Удаленная ИТ-поддержка по всему миру: создание сайтов для бизнеса, настройка 1С, ЭЦП и касс. Ремонт и сборка ПК с выездом в Абакане.">
+    <link rel="canonical" href="https://atarovart.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Артур Атаров — ИТ-услуги">
+    <meta property="og:title" content="ИТ-поддержка по всему миру: сайты и 1С — Артур Атаров">
+    <meta property="og:description" content="Удаленная ИТ-поддержка по всему миру: создание сайтов для бизнеса, настройка 1С, ЭЦП и касс. Ремонт и сборка ПК с выездом в Абакане.">
+    <meta property="og:url" content="https://atarovart.com/">
+    <meta property="og:image" content="https://atarovart.com/photo_2026-08-22_09-47-23.jpg">
+    <meta property="og:image:alt" content="Артур Атаров, ИТ-специалист">
+    <meta property="og:locale" content="ru_RU">
     <meta name="theme-color" content="#0b0f19">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Артур Атаров — ИТ-услуги",
+      "url": "https://atarovart.com/",
+      "image": "https://atarovart.com/photo_2026-08-22_09-47-23.jpg",
+      "telephone": "+7-980-148-23-57",
+      "email": "at.art7100@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Абакан",
+        "addressRegion": "Республика Хакасия",
+        "addressCountry": "RU"
+      },
+      "areaServed": [
+        "Весь мир (удаленная ИТ-поддержка)",
+        "Абакан и пригород (выездное обслуживание)"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "ИТ-услуги",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Создание сайтов для бизнеса"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Настройка 1С, УТМ, ЭЦП, Рутокен и КриптоПро"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Диагностика и чистка компьютеров"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Переустановка Windows"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Сборка и апгрейд ПК"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Установка SSD и оперативной памяти"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Восстановление данных и удаленная компьютерная помощь"
+            }
+          }
+        ]
+      }
+    }
+    </script>
     
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="styles.css">
@@ -1971,6 +2057,21 @@
             const descriptionMeta = document.querySelector('meta[name="description"]');
             if (descriptionMeta) {
                 descriptionMeta.setAttribute('content', dict.metaDescription);
+            }
+
+            const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+            if (ogTitleMeta) {
+                ogTitleMeta.setAttribute('content', dict.title);
+            }
+
+            const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+            if (ogDescriptionMeta) {
+                ogDescriptionMeta.setAttribute('content', dict.metaDescription);
+            }
+
+            const ogLocaleMeta = document.querySelector('meta[property="og:locale"]');
+            if (ogLocaleMeta) {
+                ogLocaleMeta.setAttribute('content', { ru: 'ru_RU', en: 'en_US', sr: 'sr_RS' }[lang]);
             }
 
             document.querySelectorAll('[data-i18n-html]').forEach(el => {
