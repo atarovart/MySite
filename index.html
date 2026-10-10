@@ -1386,12 +1386,20 @@
                                 <textarea name="Проблема" rows="3" data-i18n-placeholder="contact.problemPlaceholder" placeholder="Не включается, сильно тормозит, нужен выезд..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all resize-none"></textarea>
                             </div>
 
+                            <div class="flex items-start gap-3 text-xs text-slate-300 leading-relaxed">
+                                <input id="main-personal-data-consent" type="checkbox" name="personal_data_consent" value="yes" required class="mt-1 shrink-0" style="accent-color: #06b6d4;">
+                                <label for="main-personal-data-consent">
+                                    <span data-i18n="privacy.consentPrefix">Я даю согласие на обработку персональных данных в соответствии с</span>
+                                    <a href="privacy-policy.html" class="text-cyan-400 underline underline-offset-2 hover:text-cyan-300" data-i18n="privacy.policyLink">Политикой конфиденциальности</a>.
+                                </label>
+                            </div>
+
                             <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white font-bold text-base shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all" data-i18n="contact.submitButton">
                                 <i class="fa-solid fa-paper-plane mr-2"></i> Отправить заявку
                             </button>
 
                             <p class="text-center text-xs text-slate-500 mt-2" data-i18n="contact.securityInfo">
-                                <i class="fa-solid fa-lock text-slate-600 mr-1"></i> Ваши данные в безопасности и не передаются третьим лицам.
+                                <i class="fa-solid fa-lock text-slate-600 mr-1"></i> Данные используются для ответа на заявку и передаются сервису FormToMail для доставки сообщения.
                             </p>
                         </form>
                     </div>
@@ -1430,6 +1438,14 @@
                     <textarea id="modal-notes" name="Выбранные_услуги" rows="2" data-i18n-placeholder="modal.notesPlaceholder" placeholder="Укажите дополнительные сведения или измените рассчитанную сумму..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-100 outline-none resize-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"></textarea>
                 </div>
 
+                <div class="flex items-start gap-3 text-xs text-slate-300 leading-relaxed">
+                    <input id="modal-personal-data-consent" type="checkbox" name="personal_data_consent" value="yes" required class="mt-1 shrink-0" style="accent-color: #06b6d4;">
+                    <label for="modal-personal-data-consent">
+                        <span data-i18n="privacy.consentPrefix">Я даю согласие на обработку персональных данных в соответствии с</span>
+                        <a href="privacy-policy.html" class="text-cyan-400 underline underline-offset-2 hover:text-cyan-300" data-i18n="privacy.policyLink">Политикой конфиденциальности</a>.
+                    </label>
+                </div>
+
                 <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all" data-i18n="modal.submitButton">
                     Подтвердить вызов / звонок
                 </button>
@@ -1442,6 +1458,7 @@
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p data-i18n="footer.text">© 2026 Артур Атаров. ИТ-поддержка, 1С и настройка серверов.</p>
             <p data-i18n="footer.contact">Телефон: +7 (980) 148-23-57 • Email: at.art7100@gmail.com</p>
+            <a href="privacy-policy.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2" data-i18n="privacy.footerLink">Политика конфиденциальности</a>
         </div>
     </footer>
 
@@ -1555,7 +1572,10 @@
                 'contact.problemLabel': 'Что случилось с ПК/ноутбуком?',
                 'contact.problemPlaceholder': 'Не включается, сильно тормозит, нужен выезд...',
                 'contact.submitButton': 'Отправить заявку',
-                'contact.securityInfo': 'Ваши данные в безопасности и не передаются третьим лицам.',
+                'contact.securityInfo': 'Данные используются для ответа на заявку и передаются сервису FormToMail для доставки сообщения.',
+                'privacy.consentPrefix': 'Я даю согласие на обработку персональных данных в соответствии с',
+                'privacy.policyLink': 'Политикой конфиденциальности',
+                'privacy.footerLink': 'Политика конфиденциальности',
                 'modal.title': 'Оставить заявку',
                 'modal.subtitle': 'Бесплатная консультация мастера',
                 'modal.nameLabel': 'Имя',
@@ -1691,7 +1711,10 @@
                 'contact.problemLabel': 'What happened to the PC/laptop?',
                 'contact.problemPlaceholder': 'Doesn’t turn on, very slow, needs a visit...',
                 'contact.submitButton': 'Send request',
-                'contact.securityInfo': 'Your data is safe and will not be shared with third parties.',
+                'contact.securityInfo': 'Your data is used to respond to your request and is sent to FormToMail to deliver the message.',
+                'privacy.consentPrefix': 'I consent to the processing of my personal data in accordance with the',
+                'privacy.policyLink': 'Privacy Policy',
+                'privacy.footerLink': 'Privacy Policy',
                 'modal.title': 'Leave a request',
                 'modal.subtitle': 'Free master consultation',
                 'modal.nameLabel': 'Name',
@@ -1827,7 +1850,10 @@
                 'contact.problemLabel': 'Šta se dogodilo sa računarom/laptopom?',
                 'contact.problemPlaceholder': 'Ne uključuje se, jako sporo radi, potreban je dolazak...',
                 'contact.submitButton': 'Pošalji zahtev',
-                'contact.securityInfo': 'Vaši podaci su bezbedni i ne prosleđuju se trećim licima.',
+                'contact.securityInfo': 'Podaci se koriste za odgovor na zahtev i prosleđuju se servisu FormToMail radi isporuke poruke.',
+                'privacy.consentPrefix': 'Dajem saglasnost za obradu svojih ličnih podataka u skladu sa',
+                'privacy.policyLink': 'politikom privatnosti',
+                'privacy.footerLink': 'Politika privatnosti',
                 'modal.title': 'Ostavite zahtev',
                 'modal.subtitle': 'Besplatna konsultacija majstora',
                 'modal.nameLabel': 'Ime',
@@ -2293,6 +2319,8 @@
         }
 
         function submitFormAjax(form, submitBtn, successCallback) {
+            if (!form.reportValidity()) return;
+
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> ${getText('toast.sending')}`;
             submitBtn.style.opacity = '0.7';
