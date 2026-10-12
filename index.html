@@ -200,6 +200,47 @@
             padding-top: 0.75rem;
         }
 
+        .website-brief-cta {
+            animation: website-brief-glow 2s ease-in-out infinite;
+        }
+
+        .website-brief-cta-text {
+            color: #fff;
+            background: linear-gradient(90deg, #fff 0%, #a5f3fc 35%, #f0abfc 65%, #fff 100%);
+            background-size: 250% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: website-brief-text 3s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.55));
+        }
+
+        @keyframes website-brief-glow {
+            0%, 100% {
+                box-shadow: 0 0 12px rgba(168, 85, 247, 0.35), 0 0 24px rgba(59, 130, 246, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(192, 132, 252, 0.7), 0 0 36px rgba(96, 165, 250, 0.4);
+            }
+        }
+
+        @keyframes website-brief-text {
+            to {
+                background-position: 100% 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .website-brief-cta,
+            .website-brief-cta-text {
+                animation: none;
+            }
+
+            .website-brief-cta-text {
+                background-position: 50% 0;
+            }
+        }
+
         .lang-menu {
             max-height: 0;
             opacity: 0;
@@ -798,6 +839,10 @@
                     </div>
                     <div class="pt-4 border-t border-slate-800 bg-slate-900/40 -mx-6 -mb-6 p-4 rounded-b-2xl">
                         <p class="text-xs text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i> <span data-static-key="service1.result">Результат: Готовый сайт, который помогает продавать и привлекать клиентов.</span></p>
+                        <a href="https://forms.gle/ib6Rx5ucfddLaPSM9" target="_blank" rel="noopener noreferrer" class="website-brief-cta mt-4 w-full px-4 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-600 text-white font-bold text-sm shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span class="website-brief-cta-text" data-static-key="service1.cta">Хочу сайт уже завтра</span>
+                        </a>
                     </div>
                 </div>
 
@@ -1894,6 +1939,7 @@
                 'service1.item3': 'Корпоративный сайт / сайт компании',
                 'service1.item4': 'Доработка, поддержка и SEO-структура',
                 'service1.result': 'Результат: Готовый сайт, который помогает продавать и привлекать клиентов.',
+                'service1.cta': 'Хочу сайт уже завтра',
                 'service2.title': '2. Настройка 1С, УТМ, ЭЦП, Рутокен и КриптоПро',
                 'service2.item1': 'Настройка и подключение 1С, касс, серверов и рабочих сервисов',
                 'service2.item2': 'Подключение и настройка УТМ, рабочих сред и доступа к ресурсам',
@@ -1942,6 +1988,7 @@
                 'service1.item3': 'Corporate website / company site',
                 'service1.item4': 'Enhancements, support and SEO structure',
                 'service1.result': 'Result: a ready-made website that helps sell and attract clients.',
+                'service1.cta': 'I want a website by tomorrow',
                 'service2.title': '2. Setting up 1C, UTM, electronic signatures, Rutoken and CryptoPro',
                 'service2.item1': 'Setup and connection of 1C, cash registers, servers and work services',
                 'service2.item2': 'Connection and setup of UTM, work environments and resource access',
@@ -1990,6 +2037,7 @@
                 'service1.item3': 'Korporativni sajt / sajt kompanije',
                 'service1.item4': 'Dorada, podrška i SEO struktura',
                 'service1.result': 'Rezultat: Gotov sajt koji pomaže da se prodaje i privuku klijenti.',
+                'service1.cta': 'Želim sajt već sutra',
                 'service2.title': '2. Podešavanje 1C, UTM, elektronskih potpisa, Rutoken i CryptoPro',
                 'service2.item1': 'Podešavanje i povezivanje 1C, kasa, servera i radnih servisa',
                 'service2.item2': 'Povezivanje i podešavanje UTM, radnih okruženja i pristupa resursima',
