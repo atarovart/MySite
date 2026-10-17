@@ -568,6 +568,56 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #06b6d4;
         }
+    
+        /* Motion system: subtle, varied and accessible */
+        :root { --motion-ease: cubic-bezier(.2,.75,.25,1); }
+        html.motion-ready [data-motion] {
+            opacity: 0;
+            transition: opacity .7s var(--motion-ease), transform .8s var(--motion-ease), filter .8s var(--motion-ease);
+            transition-delay: var(--motion-delay, 0ms);
+            will-change: opacity, transform;
+        }
+        html.motion-ready [data-motion="rise"] { transform: translate3d(0, 28px, 0); }
+        html.motion-ready [data-motion="left"] { transform: translate3d(-28px, 0, 0); }
+        html.motion-ready [data-motion="right"] { transform: translate3d(28px, 0, 0); }
+        html.motion-ready [data-motion="scale"] { transform: scale(.94); filter: blur(3px); }
+        html.motion-ready [data-motion="flip"] { transform: perspective(900px) rotateX(7deg) translateY(18px); transform-origin: center bottom; }
+        html.motion-ready [data-motion].is-visible { opacity: 1; transform: none; filter: none; }
+        .glass-card-hover, .service-card, a, button, .price-pill, .calc-price-pill {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-card-hover { transition: transform .35s var(--motion-ease), border-color .35s ease, box-shadow .35s ease, background-color .35s ease; }
+        .glass-card-hover:hover { transform: translateY(-6px) scale(1.008); }
+        button:not(:disabled), a[href] { transition: color .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s var(--motion-ease); }
+        button:not(:disabled):active { transform: scale(.975); }
+        a[href]:not(.no-motion):hover { text-decoration-thickness: 2px; }
+        .hero-title { animation: heroTextIn .9s var(--motion-ease) both; }
+        .hero-title .bg-clip-text { background-size: 200% auto; animation: gradientFlow 7s ease-in-out infinite alternate; }
+        .glow-effect::before { animation: glowDrift 9s ease-in-out infinite alternate; }
+        .motion-orb {
+            position: absolute; width: 240px; height: 240px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(6,182,212,.12), rgba(59,130,246,.04) 45%, transparent 70%);
+            filter: blur(8px); pointer-events: none; z-index: -1;
+            animation: orbFloat 11s ease-in-out infinite alternate;
+        }
+        .motion-orb.orb-two { width: 170px; height: 170px; animation-duration: 14s; animation-direction: alternate-reverse; }
+        .motion-progress { position: fixed; inset: 0 auto auto 0; height: 3px; width: 0; z-index: 10000;
+            background: linear-gradient(90deg,#06b6d4,#2dd4bf,#3b82f6); box-shadow: 0 0 12px rgba(6,182,212,.4); pointer-events: none; }
+        .motion-link-arrow i { transition: transform .25s var(--motion-ease); }
+        .motion-link-arrow:hover i { transform: translateX(4px); }
+        @keyframes heroTextIn { from { opacity: 0; transform: translateY(18px); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+        @keyframes gradientFlow { from { background-position: 0% center; } to { background-position: 100% center; } }
+        @keyframes glowDrift { from { transform: translate3d(-2%,0,0) scale(.95); opacity: .65; } to { transform: translate3d(3%,4%,0) scale(1.08); opacity: 1; } }
+        @keyframes orbFloat { from { transform: translate3d(-10px,-8px,0) scale(.94); } to { transform: translate3d(16px,18px,0) scale(1.06); } }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            html.motion-ready [data-motion] { opacity: 1; transform: none; filter: none; }
+        }
+        @media (max-width: 640px) {
+            .motion-orb { width: 140px; height: 140px; }
+            html.motion-ready [data-motion="left"], html.motion-ready [data-motion="right"] { transform: translate3d(0, 18px, 0); }
+        }
+
     </style>
 </head>
 <body class="antialiased text-slate-200">
@@ -2469,6 +2519,86 @@
             applyLanguage('ru');
             calculateTotal();
         });
+    
+        // Lightweight motion system: no extra runtime library required.
+        (() => {
+            const root = document.documentElement;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const addProgress = () => {
+                const bar = document.createElement('div');
+                bar.className = 'motion-progress';
+                bar.setAttribute('aria-hidden', 'true');
+                document.body.appendChild(bar);
+                let ticking = false;
+                const update = () => {
+                    const max = document.documentElement.scrollHeight - window.innerHeight;
+                    bar.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+                    ticking = false;
+                };
+                window.addEventListener('scroll', () => {
+                    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+                }, { passive: true });
+                update();
+            };
+            const setupMotion = () => {
+                if (reduceMotion) return;
+                const candidates = [
+                    ['section h2', 'rise'],
+                    ['.glass-card', 'scale'],
+                    ['.glass-card-hover', 'rise'],
+                    ['.hero-compact > div', 'rise'],
+                    ['#calculator form, #calculator .calc-row', 'left'],
+                    ['#faq details, #faq .faq-item', 'flip'],
+                    ['#contact form, #contact .glass-card', 'right'],
+                    ['#coverage .grid > div', 'rise'],
+                    ['#remote .grid > div', 'scale'],
+                    ['.profile-row', 'left']
+                ];
+                const seen = new Set();
+                candidates.forEach(([selector, type]) => {
+                    document.querySelectorAll(selector).forEach((el, index) => {
+                        if (seen.has(el) || el.closest('#mobile-menu')) return;
+                        seen.add(el);
+                        el.dataset.motion = type;
+                        el.style.setProperty('--motion-delay', `${Math.min(index % 4, 3) * 85}ms`);
+                    });
+                });
+                // Ensure all service cards and repeated grids reveal with a natural stagger.
+                document.querySelectorAll('#services .grid > *, #coverage .grid > *, #remote .grid > *').forEach((el, i) => {
+                    if (!seen.has(el)) { seen.add(el); el.dataset.motion = i % 3 === 0 ? 'scale' : 'rise'; }
+                    el.style.setProperty('--motion-delay', `${(i % 4) * 75}ms`);
+                });
+                root.classList.add('motion-ready');
+                if (!('IntersectionObserver' in window)) {
+                    document.querySelectorAll('[data-motion]').forEach(el => el.classList.add('is-visible'));
+                    return;
+                }
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+                document.querySelectorAll('[data-motion]').forEach(el => observer.observe(el));
+            };
+            document.addEventListener('DOMContentLoaded', () => {
+                addProgress();
+                setupMotion();
+                // Add ambient light accents to selected sections without affecting layout.
+                document.querySelectorAll('.glow-effect').forEach((section, i) => {
+                    if (section.querySelector('.motion-orb')) return;
+                    const orb = document.createElement('span');
+                    orb.className = `motion-orb${i % 2 ? ' orb-two' : ''}`;
+                    orb.setAttribute('aria-hidden', 'true');
+                    orb.style.top = i % 2 ? '12%' : '38%';
+                    orb.style.right = i % 2 ? '3%' : '8%';
+                    section.appendChild(orb);
+                });
+            });
+        })();
+
     </script>
 </body>
 </html>
