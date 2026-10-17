@@ -17,6 +17,65 @@ body {
   overflow-x: hidden;
 }
 
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 15, 25, 0.96);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 220ms ease, visibility 0s linear 220ms;
+}
+
+.page-loader-content {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.page-loader-spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid rgba(148, 163, 184, 0.25);
+  border-top-color: #22d3ee;
+  border-radius: 50%;
+  animation: page-loader-spin 800ms linear infinite;
+}
+
+html.is-loading .page-loader {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+html.is-leaving body {
+  opacity: 0;
+  transition: opacity 360ms ease-in-out;
+}
+
+body.page-entering {
+  animation: page-enter 480ms ease-in-out both;
+}
+
+@keyframes page-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .glass-card {
   background: rgba(17, 24, 39, 0.7);
   backdrop-filter: blur(16px);
@@ -171,5 +230,19 @@ body {
 
   .profile-row .profile-value {
     font-size: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader-spinner {
+    animation: none;
+  }
+
+  body.page-entering {
+    animation-duration: 1ms;
+  }
+
+  html.is-leaving body {
+    transition-duration: 1ms;
   }
 }
