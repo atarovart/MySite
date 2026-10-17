@@ -95,6 +95,7 @@
     
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="styles.css">
+    <script src="page-transitions.js" defer></script>
     
     <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,8 +207,8 @@
 
         .website-brief-cta-text {
             color: #fff;
-            background: linear-gradient(90deg, #fff 0%, #a5f3fc 35%, #f0abfc 65%, #fff 100%);
-            background-size: 250% 100%;
+            background: linear-gradient(90deg, #fff 0%, #a5f3fc 17.5%, #f0abfc 32.5%, #fff 50%, #a5f3fc 67.5%, #f0abfc 82.5%, #fff 100%);
+            background-size: 200% 100%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -621,6 +622,13 @@
     </style>
 </head>
 <body class="antialiased text-slate-200">
+
+    <div class="page-loader" aria-hidden="true">
+        <div class="page-loader-content" role="status" aria-live="polite">
+            <span class="page-loader-spinner" aria-hidden="true"></span>
+            <span>Загружаем страницу...</span>
+        </div>
+    </div>
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
