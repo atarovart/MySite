@@ -35,6 +35,6 @@
     event.preventDefault();
     isNavigating = true;
     document.documentElement.classList.add('is-page-leaving');
-    navigationTimer = window.setTimeout(() => window.location.assign(destination.href), 160);
+    navigationTimer = window.setTimeout(() => window.location.assign(destination.href), 400);
   });
 })();

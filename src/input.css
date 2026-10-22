@@ -15,11 +15,11 @@ body {
   color: #f3f4f6;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  transition: opacity 160ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
 }
 
 body.page-entering {
-  animation: page-transition-in 240ms ease-out both;
+  animation: page-transition-in 400ms ease-out both;
 }
 
 html.is-page-leaving body {
