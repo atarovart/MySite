@@ -19,17 +19,15 @@ body {
 }
 
 body.page-entering {
-  animation: page-transition-in 400ms ease-out both;
+  opacity: 0;
+}
+
+body.page-entering.page-entered {
+  opacity: 1;
 }
 
 html.is-page-leaving body {
   opacity: 0;
-}
-
-@keyframes page-transition-in {
-  from {
-    opacity: 0;
-  }
 }
 
 .glass-card {
@@ -195,6 +193,6 @@ html.is-page-leaving body {
   }
 
   body.page-entering {
-    animation-duration: 1ms;
+    transition-duration: 1ms;
   }
 }

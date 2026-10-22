@@ -4,22 +4,28 @@
 
   let isNavigating = false;
   let navigationTimer;
+  let enteringTimer;
 
-  const finishEntering = (event) => {
-    if (event.target !== document.body || event.animationName !== 'page-transition-in') return;
-    document.body.classList.remove('page-entering');
-    document.body.removeEventListener('animationend', finishEntering);
+  const startEntering = () => {
+    window.clearTimeout(enteringTimer);
+    document.body.classList.remove('page-entered');
+    document.body.classList.add('page-entering');
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => document.body.classList.add('page-entered'));
+    });
+    enteringTimer = window.setTimeout(() => {
+      document.body.classList.remove('page-entering', 'page-entered');
+    }, 500);
   };
 
-  document.body.classList.add('page-entering');
-  document.body.addEventListener('animationend', finishEntering);
+  startEntering();
 
   window.addEventListener('pageshow', (event) => {
     if (!event.persisted) return;
     window.clearTimeout(navigationTimer);
     isNavigating = false;
     document.documentElement.classList.remove('is-page-leaving');
-    document.body.classList.remove('page-entering');
+    startEntering();
   });
 
   document.addEventListener('click', (event) => {
@@ -35,6 +41,18 @@
     event.preventDefault();
     isNavigating = true;
     document.documentElement.classList.add('is-page-leaving');
-    navigationTimer = window.setTimeout(() => window.location.assign(destination.href), 400);
+
+    const navigate = () => {
+      window.clearTimeout(navigationTimer);
+      document.body.removeEventListener('transitionend', finishLeaving);
+      window.location.assign(destination.href);
+    };
+
+    const finishLeaving = (transitionEvent) => {
+      if (transitionEvent.target === document.body && transitionEvent.propertyName === 'opacity') navigate();
+    };
+
+    document.body.addEventListener('transitionend', finishLeaving);
+    navigationTimer = window.setTimeout(navigate, 600);
   });
 })();
