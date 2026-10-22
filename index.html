@@ -108,7 +108,7 @@
             background-color: #0b0f19;
             color: #f3f4f6;
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
         
         .glass-card {
@@ -296,15 +296,16 @@
             .site-header {
                 /* Sticky positioning follows the document viewport and avoids
                    jumping when mobile browser chrome expands/collapses. */
-                position: -webkit-fixed;
+                position: -webkit-sticky;
+                position: sticky;
                 top: 0;
                 height: 64px !important;
                 overflow-x: clip;
                 border-left: 0;
                 border-right: 0;
-                background-color: rgba(11, 15, 25, 0.96);
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
+                background-color: rgba(17, 24, 39, 0.7);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
             }
 
             .site-header > .max-w-7xl > div {
