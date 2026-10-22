@@ -300,7 +300,8 @@
             }
 
             .site-header {
-                position: fixed !important;
+                position: -webkit-sticky; 
+                position: sticky;
                 top: 0;
                 left: 0;
                 right: 0;
@@ -308,10 +309,7 @@
                 height: 64px !important;
                 overflow-x: clip;
                 border-left: 0;
-                border-right: 0;
-                background-color: rgba(17, 24, 39, 0.7);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
+                z-index: 1000;
             }
 
             .site-header > .max-w-7xl > div {
