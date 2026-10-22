@@ -3,6 +3,8 @@
   const loader = document.querySelector('.page-loader');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let loadingTimer;
+  let navigationTimer;
+  let isNavigating = false;
 
   const setLoading = (visible) => {
     root.classList.toggle('is-loading', visible);
@@ -43,7 +45,27 @@
     if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
 
     event.preventDefault();
+    if (isNavigating) return;
+
+    isNavigating = true;
     root.classList.add('is-leaving');
-    window.setTimeout(() => window.location.assign(destination.href), reduceMotion ? 0 : 360);
+
+    const navigate = () => {
+      window.clearTimeout(navigationTimer);
+      document.body.removeEventListener('transitionend', finishLeaving);
+      window.location.assign(destination.href);
+    };
+
+    const finishLeaving = (event) => {
+      if (event.target === document.body && event.propertyName === 'opacity') navigate();
+    };
+
+    if (reduceMotion) {
+      navigate();
+      return;
+    }
+
+    document.body.addEventListener('transitionend', finishLeaving);
+    navigationTimer = window.setTimeout(navigate, 500);
   });
 })();

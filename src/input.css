@@ -15,6 +15,7 @@ body {
   color: #f3f4f6;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  transition: opacity 360ms ease-in-out;
 }
 
 .page-loader {
@@ -54,7 +55,6 @@ html.is-loading .page-loader {
 
 html.is-leaving body {
   opacity: 0;
-  transition: opacity 360ms ease-in-out;
 }
 
 body.page-entering {
