@@ -6,30 +6,6 @@
   color-scheme: dark;
 }
 
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root) {
-  animation: 180ms ease-in both page-transition-out;
-}
-
-::view-transition-new(root) {
-  animation: 180ms ease-out both page-transition-in;
-}
-
-@keyframes page-transition-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes page-transition-in {
-  from {
-    opacity: 0;
-  }
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -39,6 +15,21 @@ body {
   color: #f3f4f6;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  transition: opacity 160ms ease-in-out;
+}
+
+body.page-entering {
+  animation: page-transition-in 240ms ease-out both;
+}
+
+html.is-page-leaving body {
+  opacity: 0;
+}
+
+@keyframes page-transition-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .glass-card {
@@ -199,9 +190,11 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(root),
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  body {
+    transition-duration: 1ms;
+  }
+
+  body.page-entering {
     animation-duration: 1ms;
   }
 }
