@@ -293,12 +293,18 @@
         }
 
         @media (max-width: 767px) {
+            /* Keep the mobile header anchored to the top of the viewport.
+               Reserve its height in the document flow so the hero is not covered. */
+            body {
+                padding-top: 64px;
+            }
+
             .site-header {
-                /* Sticky positioning follows the document viewport and avoids
-                   jumping when mobile browser chrome expands/collapses. */
-                position: -webkit-sticky;
-                position: sticky;
+                position: fixed !important;
                 top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
                 height: 64px !important;
                 overflow-x: clip;
                 border-left: 0;
