@@ -6,6 +6,30 @@
   color-scheme: dark;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: 180ms ease-in both page-transition-out;
+}
+
+::view-transition-new(root) {
+  animation: 180ms ease-out both page-transition-in;
+}
+
+@keyframes page-transition-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-transition-in {
+  from {
+    opacity: 0;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -15,65 +39,6 @@ body {
   color: #f3f4f6;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  transition: opacity 360ms ease-in-out;
-}
-
-.page-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 10001;
-  display: grid;
-  place-items: center;
-  background: rgba(11, 15, 25, 0.96);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 220ms ease, visibility 0s linear 220ms;
-}
-
-.page-loader-content {
-  display: grid;
-  justify-items: center;
-  gap: 1rem;
-  color: #cbd5e1;
-  font-size: 0.9rem;
-}
-
-.page-loader-spinner {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 3px solid rgba(148, 163, 184, 0.25);
-  border-top-color: #22d3ee;
-  border-radius: 50%;
-  animation: page-loader-spin 800ms linear infinite;
-}
-
-html.is-loading .page-loader {
-  opacity: 1;
-  visibility: visible;
-  transition-delay: 0s;
-}
-
-html.is-leaving body {
-  opacity: 0;
-}
-
-body.page-entering {
-  animation: page-enter 480ms ease-in-out both;
-}
-
-@keyframes page-loader-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes page-enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 .glass-card {
@@ -234,15 +199,9 @@ body.page-entering {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-loader-spinner {
-    animation: none;
-  }
-
-  body.page-entering {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation-duration: 1ms;
-  }
-
-  html.is-leaving body {
-    transition-duration: 1ms;
   }
 }
